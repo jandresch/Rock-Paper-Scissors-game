@@ -1,2 +1,2 @@
 # Rock-Paper-Scissors-game
-My first game project 
+My first game project, :)
