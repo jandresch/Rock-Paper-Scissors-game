@@ -12,14 +12,14 @@
     <link rel="stylesheet" href="./styles/mobile-styles.css">
 </head>
 <body>
-    <section class="preloader">
+    <section id="preload" class="preloader">
         <div class="preloader_menu">
             <h2 class="preloader-title">Rock - Paper - Scissors</h2>
             <span id="btn-start" class="button button_start"><p>Start Game</p></span>
             <span id="btn-leave" class="button button_leave"><p>Leave Game</p></span>
         </div>
     </section>
-    <section class="game_menu">
+    <section id="menu" class="game_menu">
         <div class="game_menu_options">
             <div class="options-info">
                 <h2>Rock - Paper - Scissors</h2>
@@ -30,8 +30,34 @@
                 <span id="btn-medium" class="button button_medium"><p>Medium</p></span>
                 <span id="btn-hard" class="button button_hard"><p>Hard</p></span>
             </div>
-            <a href="/" class="options-link"><p>How to play</p></a>
+            <span id="how-play"  class="options-link"><p>How to play</p></span>
         </div>
+        <section id="instructions" class="instructions_container hidden">
+            <div class="instructions_section">
+                <div class="instructions-title">
+                    <h2>How to play?</h2>
+                </div>
+                <div class="instructions-info">
+                    <p>Rock Paper and Scissors it’s a simple game, is usually played by two people but in this case you will be playing allone agains the computer.</p> <br>
+                    <p>To play you have to choose one of the three options that you have, deppending on which option you choose you can win or lose the game.</p> <br>
+                    <p>Observe the next combinations to understand how you can win or lose:</p> <br>
+                    <ul>
+                        <li>Rock and Scissors = Rock Wins</li>
+                        <li>Rock and Paper = Paper Wins</li>
+                        <li>Rock and Rock = Tie</li>
+                        <br>
+                        <li>Paper and Scissors = Scissors Wins</li>
+                        <li>Paper and Paper = Tie</li>
+                        <li>Paper and Rock = Paper Wins</li>
+                        <br>
+                        <li>Scissors and Scissors = Tie</li>
+                        <li>Scissors and Paper = Scissors Win</li>
+                        <li>Scissors and Rock = Rock Wins</li>
+                    </ul> <br> <br>
+                    <p>And that’s it, enjoy the game :)</p>
+                </div>
+            </div>
+        </section>
     </section>
     <section class="game_main_section">
         <header class="main_title_section">
@@ -71,7 +97,7 @@
                             </div>
                         </div>
                 </section>
-                <div class="pause-button"><i class="fa-sharp fa-solid fa-pause"></i></div>
+                <div id="pause-btn" class="pause-button"><i class="fa-sharp fa-solid fa-pause"></i></div>    
         </main>
         <footer class="footer_section">
             <div class="personal_info">
@@ -83,8 +109,24 @@
             </div>
             <div class="date">Guatemala 2022</div>
         </footer>
+        <section id="pause" class="pause_container hidden">
+            <div class="pause_section">
+                <h2>pause</h2>
+                <span id="btn-continue" class="button button_continue"><p>Continue</p></span>
+                <span id="p-btn-leave" class="button button_leave"><p>Leave the Game</p></span>
+            </div>
+        </section>
+        <section id="results" class="results_container hidden">
+            <div class="results_section">
+                <h2>results</h2>
+                <div id="results-contain" class="players_results">
+        
+                </div>
+                <span id="btn-continue" class="button button_continue"><p>Play again</p></span>
+                <span id="btn-leave" class="button button_leave"><p>Leave the Game</p></span>
+            </div>
+        </section>
     </section>
-    <section></section>
     <script src="./script.js"></script>
     <script src="https://kit.fontawesome.com/441c4bfaeb.js" crossorigin="anonymous"></script>
 </body>
