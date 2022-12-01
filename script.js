@@ -1,5 +1,5 @@
 const btnStart = document.querySelector('#btn-start');
-const btnLeave = document.querySelector('#btn-leave');
+const btnLeave = document.getElementsByClassName("button_leave");
 const firstMenu = document.querySelector('#preload');
 const instructions = document.querySelector('#instructions');
 const instLink = document.querySelector('#how-play');
@@ -9,10 +9,9 @@ const btnMedium = document.querySelector('#btn-medium');
 const btnHard = document.querySelector('#btn-hard');
 const pauseMenu = document.querySelector('#pause');
 const btnPause = document.querySelector('#pause-btn');
-const btnContinue = document.querySelector('#btn-continue');
-const pBtnLeave = document.querySelector('#p-btn-leave');
 const resultsSection = document.querySelector('#results');
-const resultsContainer = document.querySelector('#results-contain')
+const resultsContainer = document.querySelector('#results-contain');
+const continueGame = document.getElementsByClassName("button_continue");
 const cOptions = [
     document.querySelector('#cRock'),
     document.querySelector('#cPaper'),
@@ -22,39 +21,34 @@ const plRock = document.querySelector('#pRock');
 const plPaper = document.querySelector('#pPaper');
 const plScissors = document.querySelector('#pScissors');
 
+
 let i = 0;
-let enemy = 0;
+let enemy = undefined;
 let selection = undefined;
-let tratar;
+let cycle;
+let intervalTime = undefined;
 
-function easyGame(){
-    gameMenu.classList.add("hidden");
-    tratar = setInterval(iterarion, 1000);
-}
-function mediumGame(){
-    gameMenu.classList.add("hidden");
-    tratar = setInterval(iterarion, 500);
-}
-function hardGame(){
-    gameMenu.classList.add("hidden");
-    tratar = setInterval(iterarion, 300);
+
+function startGame(interval){
+    intervalTime = interval;
+    cycle = setInterval(iteration, intervalTime);
 }
 
-function iterarion(){
+function iteration(){
     if(i === 0){
-        enemy = 'rock';
+        enemy = ['rock', '<i class="fa-regular fa-hand-back-fist"></i>'];
         cOptions[0].style.backgroundColor = "#ECC63E";
         cOptions[1].style.backgroundColor = "#FFFFFF";
         cOptions[2].style.backgroundColor = "#FFFFFF";
         i++;
     }else if(i === 1){
-        enemy = 'paper';
+        enemy = ['paper', '<i class="fa-regular fa-hand"></i>'];
         cOptions[1].style.backgroundColor = "#ECC63E";
         cOptions[0].style.backgroundColor = "#FFFFFF";
         cOptions[2].style.backgroundColor = "#FFFFFF";        
         i++;
     }else{
-        enemy = 'scissors';
+        enemy = ['scissors','<i class="fa-regular fa-hand-scissors"></i>'];
         cOptions[2].style.backgroundColor = "#ECC63E";
         cOptions[0].style.backgroundColor = "#FFFFFF";
         cOptions[1].style.backgroundColor = "#FFFFFF";
@@ -64,37 +58,78 @@ function iterarion(){
 }
 
 function game(){
-    clearInterval(tratar);
-    resultsSection.classList.remove("hidden");
+    detener();
 
-    if(selection === enemy){
+    let resultTitle = document.createElement("h2");
+    let optionPlayerSelection = document.createElement("div");
+    let optionComputerSelection = document.createElement("div");
+    let selectionsContainer = document.createElement("div");
+    selectionsContainer.setAttribute("class", "selections-container");
+    let optionSelectText = [
+        document.createElement("p"), 
+        document.createElement("p")
+    ];
+    optionSelectText[0].innerText = 'Player';
+    optionSelectText[1].innerText = 'Computer';
+    let optionContainer = [
+        document.createElement("div"),
+        document.createElement("div")
+        ];
+    optionContainer[0].setAttribute("class", "option-container");
+    optionContainer[1].setAttribute("class", "option-container");
 
-    }else if(selection == 1 && enemy == 2){
-        console.log('gana el enemigo')
-    }else{
-        console.log('no pasa nada ')
+    if(selection[0] === enemy[0]){
+        resultTitle.innerText = "It's a tie"
+    }else if(selection[0] == 'rock'){
+        if(enemy[0] == 'paper'){
+            resultTitle.innerText = "You Lose";
+        }else{
+            resultTitle.innerText = "You Win!!!";        
+        }
+    }else if(selection[0] == 'paper'){
+        if(enemy[0] == 'scissors'){
+            resultTitle.innerText = "You Lose";
+        }else{
+            resultTitle.innerText = "You Win!!!";        
+        }
+    }else if(selection[0] == 'scissors'){
+        if(enemy[0] == 'rock'){
+            resultTitle.innerText = "You Lose";
+        }else{
+            resultTitle.innerText = "You Win!!!";        
+        }
     }
+    optionContainer[0].innerHTML = selection[1];
+    optionContainer[1].innerHTML = enemy[1];
+    optionPlayerSelection.append(optionSelectText[0], optionContainer[0]);
+    optionComputerSelection.append(optionSelectText[1], optionContainer[1]);
+    selectionsContainer.append(optionPlayerSelection, optionComputerSelection)
+    resultsContainer.append(resultTitle, selectionsContainer);
+    showOrHidde(resultsSection);
 }
 
-function detener(){
-    clearInterval(tratar);
-}
+function showOrHidde(element){element.classList.toggle("hidden");};
+function detener(){clearInterval(cycle); cycle = null};
+function leaveGame(){location.reload(); console.log('me ejecuto')};
+function playAgain(){
+    startGame(intervalTime);
+    
+};
 
-function gamePause(){
-    pauseMenu.classList.remove("hidden");
-    clearInterval(tratar);
-}
 
-btnStart.addEventListener("click", () =>{firstMenu.classList.add("hidden")});
-instLink.addEventListener("click", () =>{instructions.classList.remove("hidden")});
-instructions.addEventListener("click", () => {instructions.classList.toggle("hidden")});
-btnLeave.addEventListener("click", () => {location.reload()});
-btnEasy.addEventListener("click", easyGame);
-btnMedium.addEventListener("click", mediumGame);
-btnHard.addEventListener("click", hardGame);
-plRock.addEventListener("click", () => {selection = 'rock'; game()});
-plPaper.addEventListener("click", () => {selection = 'paper'; game()});
-plScissors.addEventListener("click", () => {selection = 'scissors'; game()});
-btnPause.addEventListener("click",gamePause);
-pauseMenu.addEventListener("click", () => {pauseMenu.classList.toggle("hidden")});
-pBtnLeave.addEventListener("click", () => {location.reload()});
+btnStart.addEventListener("click", () =>{showOrHidde(firstMenu);});
+btnLeave[0].addEventListener("click", leaveGame);
+btnLeave[1].addEventListener("click", leaveGame);
+btnLeave[2].addEventListener("click", leaveGame);
+instLink.addEventListener("click", () => {showOrHidde(instructions)});
+instructions.addEventListener("click", () => {showOrHidde(instructions)});
+btnEasy.addEventListener("click", () => {showOrHidde(gameMenu); startGame(1000)});
+btnMedium.addEventListener("click", () => {showOrHidde(gameMenu); startGame(500)});
+btnHard.addEventListener("click", () => {showOrHidde(gameMenu); startGame(250)});
+plRock.addEventListener("click", () => {selection = ['rock', '<i class="fa-regular fa-hand-back-fist"></i>']; game()});
+plPaper.addEventListener("click", () => {selection = ['paper', '<i class="fa-regular fa-hand"></i>']; game()});
+plScissors.addEventListener("click", () => {selection = ['scissors', '<i class="fa-regular fa-hand-scissors"></i>']; game()});
+btnPause.addEventListener("click",() => {showOrHidde(pauseMenu); detener();});
+continueGame[0].addEventListener("click", () => {showOrHidde(pauseMenu); playAgain();});
+continueGame[1].addEventListener("click", () => {
+    showOrHidde(resultsSection); playAgain();});
