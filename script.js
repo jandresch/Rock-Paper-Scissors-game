@@ -1,3 +1,4 @@
+//Interactive Elements from html
 const btnStart = document.querySelector('#btn-start');
 const btnLeave = document.getElementsByClassName("button_leave");
 const firstMenu = document.querySelector('#preload');
@@ -12,37 +13,37 @@ const btnPause = document.querySelector('#pause-btn');
 const resultsSection = document.querySelector('#results');
 const resultsContainer = document.querySelector('#results-contain');
 const continueGame = document.getElementsByClassName("button_continue");
+const plRock = document.querySelector('#pRock');
+const plPaper = document.querySelector('#pPaper');
+const plScissors = document.querySelector('#pScissors');
 const cOptions = [
     document.querySelector('#cRock'),
     document.querySelector('#cPaper'),
     document.querySelector('#cScissors')
 ];
-const plRock = document.querySelector('#pRock');
-const plPaper = document.querySelector('#pPaper');
-const plScissors = document.querySelector('#pScissors');
 
-
-let i = 0;
-let enemy = undefined;
-let selection = undefined;
-let cycle;
-let intervalTime = undefined;
-
+//New html elements
 let resultTitle = document.createElement("h2");
 let optionPlayerSelection = document.createElement("div");
 let optionComputerSelection = document.createElement("div");
 let selectionsContainer = document.createElement("div");
-    let optionSelectText = [
-        document.createElement("p"), 
-        document.createElement("p")
-    ];
-    optionSelectText[0].innerText = 'Player';
-    optionSelectText[1].innerText = 'Computer';
-    let optionContainer = [
-        document.createElement("div"),
-        document.createElement("div")
-        ];
+let optionSelectText = [
+    document.createElement("p"), 
+    document.createElement("p")
+];
+let optionContainer = [
+    document.createElement("div"),
+    document.createElement("div")
+];
 
+//Logic variables
+let i = 0;
+let enemy = undefined;
+let selection = undefined;
+let cycle = undefined;
+let intervalTime = undefined;
+
+//Functions
 function startGame(interval){
     intervalTime = interval;
     cycle = setInterval(iteration, intervalTime);
@@ -73,7 +74,8 @@ function iteration(){
 
 function game(){
     detener();
-
+    optionSelectText[0].innerText = 'Player';
+    optionSelectText[1].innerText = 'Computer';
     selectionsContainer.setAttribute("class", "selections-container");
     optionContainer[0].setAttribute("class", "option-container");
     optionContainer[1].setAttribute("class", "option-container");
@@ -110,12 +112,9 @@ function game(){
 
 function showOrHidde(element){element.classList.toggle("hidden");};
 function detener(){clearInterval(cycle); cycle = null};
-function leaveGame(){location.reload(); console.log('me ejecuto')};
-function playAgain(){
-    startGame(intervalTime);
-};
+function leaveGame(){location.reload();};
 
-
+//Listeners
 btnStart.addEventListener("click", () =>{showOrHidde(firstMenu);});
 btnLeave[0].addEventListener("click", leaveGame);
 btnLeave[1].addEventListener("click", leaveGame);
@@ -129,6 +128,5 @@ plRock.addEventListener("click", () => {selection = ['rock', '<i class="fa-regul
 plPaper.addEventListener("click", () => {selection = ['paper', '<i class="fa-regular fa-hand"></i>']; game()});
 plScissors.addEventListener("click", () => {selection = ['scissors', '<i class="fa-regular fa-hand-scissors"></i>']; game()});
 btnPause.addEventListener("click",() => {showOrHidde(pauseMenu); detener();});
-continueGame[0].addEventListener("click", () => {showOrHidde(pauseMenu); playAgain();});
-continueGame[1].addEventListener("click", () => {
-    showOrHidde(resultsSection); playAgain();});
+continueGame[0].addEventListener("click", () => {showOrHidde(pauseMenu); startGame(intervalTime);});
+continueGame[1].addEventListener("click", () => {showOrHidde(resultsSection); startGame(intervalTime);});
