@@ -28,6 +28,20 @@ let selection = undefined;
 let cycle;
 let intervalTime = undefined;
 
+let resultTitle = document.createElement("h2");
+let optionPlayerSelection = document.createElement("div");
+let optionComputerSelection = document.createElement("div");
+let selectionsContainer = document.createElement("div");
+    let optionSelectText = [
+        document.createElement("p"), 
+        document.createElement("p")
+    ];
+    optionSelectText[0].innerText = 'Player';
+    optionSelectText[1].innerText = 'Computer';
+    let optionContainer = [
+        document.createElement("div"),
+        document.createElement("div")
+        ];
 
 function startGame(interval){
     intervalTime = interval;
@@ -60,21 +74,7 @@ function iteration(){
 function game(){
     detener();
 
-    let resultTitle = document.createElement("h2");
-    let optionPlayerSelection = document.createElement("div");
-    let optionComputerSelection = document.createElement("div");
-    let selectionsContainer = document.createElement("div");
     selectionsContainer.setAttribute("class", "selections-container");
-    let optionSelectText = [
-        document.createElement("p"), 
-        document.createElement("p")
-    ];
-    optionSelectText[0].innerText = 'Player';
-    optionSelectText[1].innerText = 'Computer';
-    let optionContainer = [
-        document.createElement("div"),
-        document.createElement("div")
-        ];
     optionContainer[0].setAttribute("class", "option-container");
     optionContainer[1].setAttribute("class", "option-container");
 
@@ -113,7 +113,6 @@ function detener(){clearInterval(cycle); cycle = null};
 function leaveGame(){location.reload(); console.log('me ejecuto')};
 function playAgain(){
     startGame(intervalTime);
-    
 };
 
 
