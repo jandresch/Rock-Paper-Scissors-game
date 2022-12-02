@@ -1,0 +1,20 @@
+/* how to play */
+.instructions_container{
+    position: absolute;
+    display: grid;
+    place-items: center;
+}
+.instructions_section{
+    width: 50%;
+    height: 52%;
+    padding: 24px;
+    border-radius: 20px;
+    position: initial;
+}
+/* footer */
+.footer_section{
+    font-size: 12px;
+}
+.footer_section .personal-logo{
+    font-size: 16px;
+}

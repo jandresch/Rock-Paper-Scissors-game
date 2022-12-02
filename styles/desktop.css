@@ -1,0 +1,48 @@
+.game_section{
+    flex-direction: row;
+}
+.game_options_section{
+    width: 240px;
+    height: 232px;
+    margin: 12px;
+    position: relative;
+}
+.game_options_section .rock{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+}
+.game_options_section .paper{
+    position: absolute;
+    top: 0;
+    left: auto;
+    right: auto;
+}
+.game_options_section .scissors{
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.option-container{
+    width: 92px;
+    height: 92px;
+}
+.option-container i{
+    font-size: 36px;
+}
+.vs-division{
+    rotate: 90deg;
+}
+.vs-division strong{
+    rotate: -90deg;
+}
+/* results */
+.results_section{
+    width: 320px;
+}
+.players_results .selections-container{
+    justify-content: space-evenly;
+}
+.selections-container div p{
+    text-align: center;
+}
